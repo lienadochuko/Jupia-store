@@ -28,7 +28,7 @@ namespace ServiceContract
         /// <summary>
         /// Returns sorted list of  filtered Goods based on the searchBy and searchString
         /// </summary>
-        /// <param name="searchBy">Search field to search</param>
+        /// <param name="searchBy">Search field to search</param> 
         /// <param name="searchString">Search string to search</param>
         /// <returns>Return the list of all Goods object that
         /// matches the given searchBy and search string</returns>

@@ -23,6 +23,7 @@ namespace ServiceContract.DTO
         [Required(ErrorMessage = "Please input store")]
         public StoreOptions? GoodsStore { get; set; }
 
+
         public Goods ToGoods()
         {
             return new Goods

@@ -5,6 +5,7 @@ using ServiceContract.Enums;
 using System;
 using static System.Reflection.Metadata.BlobBuilder;
 using System.Reflection;
+using Services.Helpers;
 
 namespace Services
 {
@@ -254,12 +255,34 @@ namespace Services
             }
         }
 
+        private GoodsResponse ConvertGoodsResponse(Goods goods)
+        {
+            GoodsResponse goodsResponse = goods.ToGoodsResponse();
+
+            return goodsResponse;
+        }
+
         public GoodsResponse AddGoods(GoodsAddRequest? goodsAddRequest)
         {
             if (goodsAddRequest == null)
             {
                 throw new ArgumentNullException(nameof(goodsAddRequest));
             }
+
+            //Model validation
+            ValidationHelpers.ModelValidation(goodsAddRequest);
+
+            //Convert from GoodsAddRequest obj to Goods obj
+            Goods goods = goodsAddRequest.ToGoods();
+
+            //generate GoodsID
+            goods.GoodsID = Guid.NewGuid();
+
+            //add person to Goods list
+            _goods.Add(goods);
+
+            //convert the Goods object into GoodsResponse type
+            return ConvertGoodsResponse(goods);
         }
 
         public bool DeleteGoods(Guid? GoodsID)
@@ -269,27 +292,120 @@ namespace Services
 
         public List<GoodsResponse> GetFilteredGoods(string searchBy, string? searchString)
         {
-            throw new NotImplementedException();
+            List<GoodsResponse> allGoods = GettAllGoods();
+            List<GoodsResponse> matchingResponse = allGoods;
+
+            if(string.IsNullOrEmpty(searchBy) || string.IsNullOrEmpty(searchString))
+            {
+                return matchingResponse;
+            }
+
+            switch(searchBy)
+            {
+                case nameof(GoodsResponse.GoodsName)
+            }
         }
 
         public List<GoodsResponse> GetSortedGoods(List<GoodsResponse> allGoods, string? sortBy, SortOrderOptions sortOrderOptions)
         {
-            throw new NotImplementedException();
+            if(string.IsNullOrEmpty(sortBy))
+                return allGoods;
+
+            List<GoodsResponse> sortedGoods = (sortBy, sortOrderOptions)
+                switch
+            {
+                (nameof(GoodsResponse.GoodsName), SortOrderOptions.ASC) =>
+                allGoods.OrderBy(temp => temp.GoodsName, StringComparer.OrdinalIgnoreCase).ToList(),
+
+                (nameof(GoodsResponse.GoodsName), SortOrderOptions.DESC) =>
+                allGoods.OrderByDescending(temp => temp.GoodsName, StringComparer.OrdinalIgnoreCase).ToList(),
+
+
+                (nameof(GoodsResponse.GoodsDescription), SortOrderOptions.ASC) =>
+                allGoods.OrderBy(temp => temp.GoodsDescription, StringComparer.OrdinalIgnoreCase).ToList(),
+
+                (nameof(GoodsResponse.GoodsDescription), SortOrderOptions.DESC) =>
+                allGoods.OrderByDescending(temp => temp.GoodsDescription, StringComparer.OrdinalIgnoreCase).ToList(),
+
+
+                (nameof(GoodsResponse.GoodsPrice), SortOrderOptions.ASC) =>
+                allGoods.OrderBy(temp => temp.GoodsPrice.ToString(), StringComparer.OrdinalIgnoreCase ).ToList(),
+
+                (nameof(GoodsResponse.GoodsPrice), SortOrderOptions.DESC) =>
+                allGoods.OrderByDescending(temp => temp.GoodsPrice.ToString(), StringComparer.OrdinalIgnoreCase).ToList(),
+
+
+                (nameof(GoodsResponse.GoodsDiscount), SortOrderOptions.ASC) =>
+                allGoods.OrderBy(temp => temp.GoodsDiscount.ToString(), StringComparer.OrdinalIgnoreCase).ToList(),
+
+                (nameof(GoodsResponse.GoodsDiscount), SortOrderOptions.DESC) =>
+                allGoods.OrderByDescending(temp => temp.GoodsDiscount.ToString(), StringComparer.OrdinalIgnoreCase).ToList(),
+
+
+                (nameof(GoodsResponse.GoodType), SortOrderOptions.ASC) =>
+                allGoods.OrderBy(temp => temp.GoodType, StringComparer.OrdinalIgnoreCase).ToList(),
+
+                (nameof(GoodsResponse.GoodType), SortOrderOptions.DESC) =>
+                allGoods.OrderByDescending(temp => temp.GoodType, StringComparer.OrdinalIgnoreCase).ToList(),
+
+
+                (nameof(GoodsResponse.GoodsStore), SortOrderOptions.ASC) =>
+                allGoods.OrderBy(temp => temp.GoodsStore, StringComparer.OrdinalIgnoreCase).ToList(),
+
+                (nameof(GoodsResponse.GoodsStore), SortOrderOptions.DESC) =>
+                allGoods.OrderByDescending(temp => temp.GoodsStore, StringComparer.OrdinalIgnoreCase).ToList(),
+
+                _=> allGoods
+            };
+
+            return sortedGoods;
         }
 
         public List<GoodsResponse> GettAllGoods()
         {
-            throw new NotImplementedException();
+            return _goods.Select(goods => ConvertGoodsResponse(goods)).ToList();
         }
 
         public GoodsResponse? GettGoodsById(Guid GoodsID)
         {
-            throw new NotImplementedException();
+            if (GoodsID == null)
+                return null;
+
+            Goods? good = _goods.FirstOrDefault(temp => temp.GoodsID == GoodsID);
+            if(good == null)
+                return null;
+
+            return ConvertGoodsResponse(good);
         }
 
         public GoodsResponse UpdateGoods(GoodsUpdateResponse? goodsUpdateResponse)
         {
-            throw new NotImplementedException();
+            if (goodsUpdateResponse == null)
+                throw new ArgumentNullException(nameof(goodsUpdateResponse));
+
+            //Validation
+            ValidationHelpers.ModelValidation(goodsUpdateResponse);
+
+            if(goodsUpdateResponse.GoodsID == new Guid())
+                throw new ArgumentNullException(nameof(goodsUpdateResponse.GoodsID));
+
+            Goods? matchingGoods = _goods.FirstOrDefault(temp => temp.GoodsID ==  goodsUpdateResponse.GoodsID);
+            if (matchingGoods == null)
+            {
+                throw new ArgumentException("Given GoodsID does not exists");
+            }
+
+            //update all details
+            matchingGoods.GoodsName = goodsUpdateResponse.GoodsName;
+            matchingGoods.GoodsDiscount = goodsUpdateResponse.GoodsDiscount;
+            matchingGoods.GoodsPrice = goodsUpdateResponse.GoodsPrice;
+            matchingGoods.GoodsDescription = goodsUpdateResponse.GoodsDescription;
+            matchingGoods.GoodType = goodsUpdateResponse?.GoodType.ToString();
+            matchingGoods.GoodsStore = goodsUpdateResponse.GoodsStore.ToString();
+
+
+            return ConvertGoodsResponse(matchingGoods);
+
         }
     }
 }
