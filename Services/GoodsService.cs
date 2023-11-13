@@ -287,7 +287,18 @@ namespace Services
 
         public bool DeleteGoods(Guid? GoodsID)
         {
-            throw new NotImplementedException();
+            if (GoodsID == null)
+                throw new ArgumentNullException(nameof(GoodsID));
+
+            Goods? matchingResponse = _goods.FirstOrDefault(temp => temp.GoodsID == GoodsID);
+            if(matchingResponse == null)
+            {
+                return false;
+            }
+
+            _goods.RemoveAll(temp => temp.GoodsID == GoodsID);
+
+            return true;
         }
 
         public List<GoodsResponse> GetFilteredGoods(string searchBy, string? searchString)
@@ -302,8 +313,50 @@ namespace Services
 
             switch(searchBy)
             {
-                case nameof(GoodsResponse.GoodsName)
+                case nameof(GoodsResponse.GoodsName): matchingResponse = allGoods.Where(temp =>
+                (!string.IsNullOrEmpty(temp.GoodsName)? temp.GoodsName.Contains(searchString, 
+                StringComparison.OrdinalIgnoreCase) : true)).ToList(); 
+                    
+                    break;
+
+                case nameof(GoodsResponse.GoodsDescription):
+                    matchingResponse = allGoods.Where(temp =>
+                (!string.IsNullOrEmpty(temp.GoodsDescription) ? temp.GoodsDescription.Contains(searchString,
+                StringComparison.OrdinalIgnoreCase) : true)).ToList();
+
+                    break;
+
+                case nameof(GoodsResponse.GoodsPrice):
+                    matchingResponse = allGoods.Where(temp =>
+                (!string.IsNullOrEmpty(temp.GoodsPrice.ToString()) ? temp.GoodsPrice.ToString().Contains(searchString,
+                StringComparison.OrdinalIgnoreCase) : true)).ToList();
+
+                    break;
+
+                case nameof(GoodsResponse.GoodsDiscount):
+                    matchingResponse = allGoods.Where(temp =>
+                (!string.IsNullOrEmpty(temp.GoodsDiscount.ToString()) ? temp.GoodsDiscount.ToString().Contains(searchString,
+                StringComparison.OrdinalIgnoreCase) : true)).ToList();
+
+                    break;
+
+                case nameof(GoodsResponse.GoodType):
+                    matchingResponse = allGoods.Where(temp =>
+                (!string.IsNullOrEmpty(temp.GoodType) ? temp.GoodType.Contains(searchString,
+                StringComparison.OrdinalIgnoreCase) : true)).ToList();
+
+                    break;
+
+                case nameof(GoodsResponse.GoodsStore):
+                    matchingResponse = allGoods.Where(temp =>
+                (!string.IsNullOrEmpty(temp.GoodsStore) ? temp.GoodsStore.Contains(searchString,
+                StringComparison.OrdinalIgnoreCase) : true)).ToList();
+
+                    break;
+
+                default: matchingResponse = allGoods; break;
             }
+            return matchingResponse;
         }
 
         public List<GoodsResponse> GetSortedGoods(List<GoodsResponse> allGoods, string? sortBy, SortOrderOptions sortOrderOptions)
