@@ -6,12 +6,12 @@ using ServiceContract.Enums;
 namespace Jupia_store.Controllers
 {
     [Route("[controller]")]
-    public class HomeController : Controller
+    public class GoodsController : Controller
     {
         //private fields
         private readonly IGoodsService _goodsService;
 
-        public HomeController(IGoodsService goodsService)
+        public GoodsController(IGoodsService goodsService)
         {
             _goodsService = goodsService;
         }

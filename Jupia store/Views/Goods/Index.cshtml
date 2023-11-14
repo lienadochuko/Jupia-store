@@ -1,0 +1,38 @@
+﻿@model IEnumerable<GoodsResponse>
+
+@{
+    ViewBag.Title = "Persons";
+}
+<div class="Goods-Container">
+
+    @foreach (GoodsResponse goods in Model)
+    {
+        <div class="Goods-Item">
+            <img src="~/Assets/goods.jpeg" alt="goods" class="Good-Item-Image" />
+            <div style="font-weight:500; color: #252525FF; font-size: 17px; margin-left: 3px;">@goods.GoodsName</div>
+            <div class="row center w-95" style="margin-left: 3px;">
+                <span style="font-weight:bolder; color: #000; font-size: 22px;">
+                    <span style="font-weight:bolder; color: #000; font-size: 16px;">NGN</span>
+                    @(goods.AfterDiscountPrice.HasValue ? goods.AfterDiscountPrice.Value.ToString("#,##0.00") : goods.AfterDiscountPrice)
+                </span>
+                @if (goods.GoodsDiscount > 0)
+                {
+                    <span style="font-weight:bolder; padding: 4px;
+color: red; font-size: 13px; margin-left:10px; background-color: #FF246935; border-radius: 5px; ">
+                        -@(goods.GoodsDiscount * 100)%
+                    </span>
+                }
+            </div>
+            <div class="center space-btwn w-25" style="font-weight:bolder; color: grey; font-size: 16px; margin-left: 3px;">
+                <span style="font-weight:bolder; color:grey; font-size: 12px; margin-right: 5px;">NGN</span>
+                <span class="line-thru">@(goods.GoodsPrice.HasValue ? goods.GoodsPrice.Value.ToString("#,##0.00") : goods.GoodsPrice)</span>
+            </div>
+
+            <div  style="margin-top: 5px; font-size: 14px;">
+                <span style="text-decoration: underline">@goods.GoodsStore</span>
+            </div>
+
+            <button class="Goods-Item-Button">Preview</button>
+        </div>
+    }
+</div>

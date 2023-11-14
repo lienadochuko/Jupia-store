@@ -1,0 +1,182 @@
+﻿@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&family=Roboto:wght@300&display=swap');
+
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 18px;
+    background-color: #ffffff;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+    box-sizing: border-box;
+}
+
+.container {
+    min-width: 550px;
+}
+
+.navbar {
+    width: 100%;
+    height: 80px;
+    background-color: #000000;
+    box-shadow: 0px 1px 2px 1px #808080;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    position: fixed;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 30px;
+    z-index: 9999;
+}
+
+.navbar-brand {
+    margin: 0px 30px 5px 5px;
+    font-size: 1.1em;
+    font-size: 1.1em;
+    text-align: center;
+    /*font-family: "Myriad Pro", Myriad, "Liberation Sans", "Nimbus Sans L", "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+}
+
+.nav-TextColor {
+    color: #ffffff;
+}
+
+.page-content {
+    width: 100%;
+    display: flex;
+    padding-top: 85px;
+    justify-content: center;
+    align-items: center;
+}
+
+.Goods-Container {
+    width: 1200px;
+    height: 100%;
+    padding: 30px;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 40px;
+    background: linear-gradient(to bottom, #ffe9f4 5%, #ffffff 80%);
+    justify-content: space-between;
+}
+
+.Goods-Item {
+    width: 250px;
+    height: 400px;
+    display: flex;
+    position: relative;
+    flex-direction: column;
+    cursor: pointer;
+    z-index: 6099;
+}
+
+    .Goods-Item:hover {
+        width: 250px;
+        height: 420px;
+        display: flex;
+        /*align-items: flex-start;*/
+        background-color: white;
+        box-shadow: 0px 1px 2px 2px #808080;
+        border-radius: 20px;
+        z-index: 9998;
+    }
+
+
+.Good-Item-Image {
+    width: 250px;
+    height: 250px;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+
+.Goods-Item-Button {
+    width: 180px;
+    height: 10%;
+    align-self: center;
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #000;
+    color: #fff;
+    border-radius: 20px;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    cursor:pointer;
+}
+
+
+.w-25 {
+    width: 25%
+}
+
+.w-50 {
+    width: 50%
+}
+
+.w-75 {
+    width: 75%
+}
+
+.w-80 {
+    width: 80%
+}
+
+.w-95 {
+    width: 95%
+}
+
+.w-100 {
+    width: 100%
+}
+
+.line-thru {
+    text-decoration: line-through;
+}
+
+.underline {
+    text-decoration: underline;
+}
+
+.text-red {
+    color: red;
+}
+
+.text-white {
+    color: white;
+}
+
+.b {
+    font-weight: 700
+}
+
+.semi-b {
+    font-weight: 500;
+}
+
+.center {
+    display: flex;
+    align-items: center
+}
+
+.space-btwn {
+    justify-content: space-between
+}
+
+.text-center {
+    text-align: center
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+}

@@ -1,4 +1,5 @@
 ﻿using Entitties;
+using ServiceContract.Enums;
 using System.ComponentModel.DataAnnotations;
 
 namespace ServiceContract.DTO
@@ -29,9 +30,9 @@ namespace ServiceContract.DTO
                 GoodsName = GoodsName,
                 GoodsPrice = GoodsPrice,
                 GoodsDiscount = GoodsDiscount,
-                GoodType = GoodType,
+                GoodType = (GoodsTypeOptions)Enum.Parse(typeof(GoodsTypeOptions), GoodType, true),
                 GoodsDescription = GoodsDescription,
-                GoodsStore = GoodsStore,
+                GoodsStore = (StoreOptions)Enum.Parse(typeof(StoreOptions), GoodType, true),
             };
         }
 
