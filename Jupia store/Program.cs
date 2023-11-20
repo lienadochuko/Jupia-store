@@ -3,6 +3,7 @@ using Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
+builder.Services.AddHttpClient();
 
 
 //add services into IoC container
@@ -14,6 +15,7 @@ if (builder.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
+
 
 app.UseStaticFiles();
 app.UseRouting();
