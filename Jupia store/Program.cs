@@ -1,13 +1,21 @@
+using Entitties;
+using Microsoft.EntityFrameworkCore;
 using ServiceContract;
 using Services;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
-builder.Services.AddHttpClient();
 
 
 //add services into IoC container
-builder.Services.AddSingleton<IGoodsService, GoodsService>();
+builder.Services.AddScoped<IGoodsService, GoodsService>();
+
+builder.Services.AddDbContext<GoodsDbContext>(
+    options =>
+    {
+        options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnections"));
+    }
+    );
 
 var app = builder.Build();
 

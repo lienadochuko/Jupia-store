@@ -1,5 +1,4 @@
-﻿@model IEnumerable<GoodsResponse>
-
+﻿@model IEnumerable<GoodsResponse>;
 @{
     ViewBag.Title = "Persons";
 }
@@ -23,9 +22,9 @@ color: red; font-size: 13px; margin-left:10px; background-color: #FF246935; bord
                     </span>
                 }
             </div>
-            <div class="center space-btwn w-25" style="font-weight:bolder; color: grey; font-size: 16px; margin-left: 3px;">
-                <span style="font-weight:bolder; color:grey; font-size: 12px; margin-right: 5px;">NGN</span>
-                <span class="line-thru">@(goods.GoodsPrice.HasValue ? goods.GoodsPrice.Value.ToString("#,##0.00") : goods.GoodsPrice) </span>
+            <div class="center space-btwn w-25 line-thru" style="font-weight:bolder; color: red; font-size: 16px; margin-left: 3px;">
+                <span style="font-weight:bolder; color: red ; font-size: 12px; margin-right: 5px;">NGN</span>
+                <span>@(goods.GoodsPrice.HasValue ? goods.GoodsPrice.Value.ToString("#,##0.00") : goods.GoodsPrice) </span>
             </div>
 
             <div  style="margin-top: 5px; font-size: 14px;">

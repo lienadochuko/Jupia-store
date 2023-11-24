@@ -12,8 +12,6 @@ namespace Jupia_store.Controllers
     {
         //private fields
         private readonly IGoodsService _goodsService;
-        private readonly IHttpClientFactory _httpClientFactory;
-
 
         public GoodsController(IGoodsService goodsService)
         {
@@ -25,42 +23,9 @@ namespace Jupia_store.Controllers
         [Route("[action]")]
         //Url: goods/
         [Route("/")]
-        public async Task<IActionResult> Index(string searchBy, string? searchString, 
+        public IActionResult Index(string searchBy, string? searchString, 
             string sortBy = nameof(GoodsResponse.GoodsName), SortOrderOptions sortOrderOptions = SortOrderOptions.ASC)
         {
-            var sanityApiUrl = "https://mdr7r2qw.api.sanity.io/v2022-03-07/data/query/production?query=*%5B_type+%3D%3D+%27Goods%27%5D+";
-            string apiKey = "yourApiKey";
-            try
-            {
-
-                using (HttpClient client = new HttpClient())
-                {
-                    // Set up the request headers or any other configurations
-                    client.DefaultRequestHeaders.Add("Authorization", "apiToken YourAccessToken");
-
-                    // Make a GET request
-                    HttpResponseMessage response = await client.GetAsync(sanityApiUrl);
-
-                    if (response.IsSuccessStatusCode)
-                    {
-                        // Handle the successful response
-                        string content = await response.Content.ReadAsStringAsync();
-                        // Deserialize content as needed
-                        ;
-                        ViewBag.SanityGoods = content.ToString();
-                        //return Content(content);
-                    }
-                    else
-                    {
-                        // Handle error responses
-                        ViewBag.SanityGoodsErrors = StatusCode((int)response.StatusCode, response.ReasonPhrase);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.ToString());
-            }
             //Searching
             ViewBag.SearchFields = new Dictionary<string, string>()
             {

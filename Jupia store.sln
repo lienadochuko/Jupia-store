@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33815.320
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Jupia store", "Jupia store\Jupia store.csproj", "{CDCDAF85-D113-4BBA-9B19-E85C99B9E2C6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Jupia store", "Jupia store\Jupia store.csproj", "{CDCDAF85-D113-4BBA-9B19-E85C99B9E2C6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entitties", "Entitties\Entitties.csproj", "{B30153B5-49D3-4307-AB4C-8A150DE2F9C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entitties", "Entitties\Entitties.csproj", "{B30153B5-49D3-4307-AB4C-8A150DE2F9C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceContract", "ServiceContract\ServiceContract.csproj", "{0999313B-9B3F-4A30-9301-76B4965957D4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceContract", "ServiceContract\ServiceContract.csproj", "{0999313B-9B3F-4A30-9301-76B4965957D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{50C2FA2C-9D65-4E36-B893-1A021463A0B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Services", "Services\Services.csproj", "{50C2FA2C-9D65-4E36-B893-1A021463A0B0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
